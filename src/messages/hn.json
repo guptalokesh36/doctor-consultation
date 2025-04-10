@@ -1,0 +1,69 @@
+{
+  "TabTitles": {
+    "home": "होम - डॉक्टर से परामर्श",
+    "about_us": "हमारे बारे में - डॉक्टर कंसल्टेशन"
+  },
+  "HomePage": {
+    "title": "ऑनलाइन शीर्ष डॉक्टरों से परामर्श करें",
+    "description": "कभी भी, कहीं भी, विश्वसनीय पेशेवरों से विशेषज्ञ चिकित्सा सलाह प्राप्त करें।",
+    "button": "एक परामर्श बुक करें",
+    "features": {
+      "easyAccess": "आसान पहुँच",
+      "easyAccessDesc": "अपने घर के आराम से प्रमाणित डॉक्टरों से जुड़ें।",
+      "verifiedDoctors": "सत्यापित डॉक्टर",
+      "verifiedDoctorsDesc": "हमारे सभी डॉक्टर लाइसेंस प्राप्त और अनुभवी पेशेवर हैं।",
+      "secureChat": "सुरक्षित चैट",
+      "secureChatDesc": "एंड-टू-एंड एन्क्रिप्टेड संदेशों के माध्यम से सुरक्षित रूप से संवाद करें।"
+    }
+  },
+  "AboutPage": {
+    "aboutUsTitle": "हमारे बारे में - डॉक्टर कंसल्टेशन",
+    "metaDescription": "Doctor Consultation के बारे में अधिक जानें, आपकी विश्वसनीय ऑनलाइन डॉक्टर कंसल्टेशन प्लेटफॉर्म।",
+
+    "aboutUs": "हमारे बारे में",
+    "whoWeAreTitle": "हम कौन हैं",
+    "whoWeAreDescription": "Doctor Consultation में आपका स्वागत है, आपके ऑनलाइन डॉक्टर कंसल्टेशन के लिए विश्वसनीय प्लेटफॉर्म। हम आपके घर के आराम से सुलभ और उच्च गुणवत्ता वाली स्वास्थ्य देखभाल प्रदान करते हैं।",
+    "doctorImageAlt": "ऑनलाइन एक डॉक्टर मरीज से परामर्श कर रहा है",
+
+    "ourMissionTitle": "हमारा मिशन",
+    "ourMissionDescription": "Doctor Consultation में, हमारा मिशन स्वास्थ्य देखभाल को और अधिक सुलभ, सुविधाजनक और विश्वसनीय बनाना है।",
+
+    "whyChooseUsTitle": "हमें क्यों चुनें?",
+    "whyChooseUsImageAlt": "एक डॉक्टर मरीज का रक्तचाप मापते हुए",
+    "expertDoctors": "विशेषज्ञ डॉक्टर :",
+    "expertDoctorsDescription": "उच्च योग्यता प्राप्त स्वास्थ्य देखभाल पेशेवर।",
+    "convenience": "सुविधा :",
+    "convenienceDescription": "कहीं से भी बुक करें और परामर्श करें।",
+    "secureConfidential": "सुरक्षित और गोपनीय :",
+    "secureConfidentialDescription": "आपके डेटा की सुरक्षा हमारी प्राथमिकता है।",
+    "affordableHealthcare": "सस्ती स्वास्थ्य देखभाल :",
+    "affordableHealthcareDescription": "प्रतिस्पर्धी दरों पर गुणवत्तापूर्ण सेवाएं।",
+    "support24x7": "24/7 सहायता :",
+    "support24x7Description": "हम हमेशा आपकी सहायता के लिए उपलब्ध हैं।",
+
+    "howItWorksTitle": "यह कैसे काम करता है",
+    "step1": "साइन अप और लॉगिन करें",
+    "step2": "एक डॉक्टर चुनें",
+    "step3": "एक अपॉइंटमेंट बुक करें",
+    "step4": "ऑनलाइन परामर्श करें",
+    "step5": "एक पर्ची प्राप्त करें",
+
+    "contactUsTitle": "संपर्क करें",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "address": "पता",
+    "contactUsImageAlt": "सहायता के लिए ग्राहक समर्थन से संपर्क करें"
+  },
+  "Footer": {
+    "brand_description": "आपका विश्वसनीय ऑनलाइन डॉक्टर परामर्श मंच।",
+    "quick_links": "त्वरित लिंक",
+    "about_us": "हमारे बारे में",
+    "services": "सेवाएँ",
+    "find_a_doctor": "डॉक्टर खोजें",
+    "contact": "संपर्क",
+    "contact_us": "हमसे संपर्क करें",
+    "email": "ईमेल: support@doctorconsultation.com",
+    "phone": "फोन: +1 234 567 890",
+    "copyright": "सर्वाधिकार सुरक्षित।"
+  }
+}

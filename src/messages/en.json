@@ -1,0 +1,71 @@
+{
+  "TabTitles": {
+    "home": "Home - Doctor Consultation",
+    "about_us":"About Us - Doctor Consultation"
+  },
+  "HomePage": {
+    "title": "Consult with Top Doctors Online",
+    "description": "Get expert medical advice from trusted professionals anytime, anywhere.",
+    "button": "Book a Consultation",
+    "features": {
+      "easyAccess": "Easy Access",
+      "easyAccessDesc": "Connect with certified doctors from the comfort of your home.",
+      "verifiedDoctors": "Verified Doctors",
+      "verifiedDoctorsDesc": "All our doctors are licensed and experienced professionals.",
+      "secureChat": "Secure Chat",
+      "secureChatDesc": "Communicate safely with end-to-end encrypted messaging."
+    }
+  },
+
+  "AboutPage": {
+    "aboutUsTitle": "About Us - Doctor Consultation",
+    "metaDescription": "Learn more about Doctor Consultation, your trusted online doctor consultation platform.",
+
+    "aboutUs": "About Us",
+    "whoWeAreTitle": "Who We Are",
+    "whoWeAreDescription": "Welcome to Doctor Consultation, your trusted platform for online doctor consultations. We provide accessible, high-quality healthcare from the comfort of your home.",
+    "doctorImageAlt": "A doctor consulting a patient online",
+
+    "ourMissionTitle": "Our Mission",
+    "ourMissionDescription": "At Doctor Consultation, our mission is to revolutionize healthcare by making it more accessible, convenient, and reliable for everyone.",
+
+    "whyChooseUsTitle": "Why Choose Us?",
+    "whyChooseUsImageAlt": "Doctor measuring blood pressure of a patient",
+    "expertDoctors": "Expert Doctors:",
+    "expertDoctorsDescription": "Highly qualified healthcare professionals.",
+    "convenience": "Convenience:",
+    "convenienceDescription": "Book and consult from anywhere.",
+    "secureConfidential": "Secure & Confidential:",
+    "secureConfidentialDescription": "Your data is safe with us.",
+    "affordableHealthcare": "Affordable Healthcare:",
+    "affordableHealthcareDescription": "Quality services at competitive rates.",
+    "support24x7": "24/7 Support:",
+    "support24x7Description": "Always here to assist you.",
+
+    "howItWorksTitle": "How It Works",
+    "step1": "Sign Up & Login",
+    "step2": "Choose a Doctor",
+    "step3": "Book an Appointment",
+    "step4": "Consult Online",
+    "step5": "Receive a Prescription",
+
+    "contactUsTitle": "Contact Us",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "contactUsImageAlt": "Contact customer support for assistance"
+  },
+
+  "Footer": {
+    "brand_description": "Your trusted online doctor consultation platform.",
+    "quick_links": "Quick Links",
+    "about_us": "About Us",
+    "services": "Services",
+    "find_a_doctor": "Find a Doctor",
+    "contact": "Contact",
+    "contact_us": "Contact Us",
+    "email": "Email: support@doctorconsultation.com",
+    "phone": "Phone: +1 234 567 890",
+    "copyright": "All rights reserved."
+  }
+}

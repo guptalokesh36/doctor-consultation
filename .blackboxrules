@@ -1,0 +1,199 @@
+---
+description: Use these rules when building Next.js projects
+globs: src/**/*.{ts,tsx,css}, next.config.ts
+alwaysApply: true
+---
+
+# Next.js Rules
+
+<author>blefnk/rules</author>
+<version>1.0.0</version>
+
+## Context
+
+- For building Next.js v15 (App Router) projects
+- Guides server vs. client component usage
+
+## Requirements
+
+- React 19 is required for Next.js 15.
+- Default `layout.tsx` and `page.tsx` to server components. Place client components into them.
+- Use client components for local state or interactivity.
+- Use `<Link>` instead for navigation unless `useRouter` is essential; `<a>` is disallowed.
+- Provide `loading.tsx` and e.g. `<Suspense fallback={<Skeleton />}>` for asynchronous data fetching. Use Shadcn UI `Skeleton` for loading states.
+- Prefer server actions instead of client API calls.
+- Maintain Edge Runtime middleware.ts compatibility (no Node.js APIs).
+- Do not pass server-only event handlers or data to client components.
+- `useFormState` replaced by `useActionState`.
+- Imports: `ImageResponse` moved from `next/server` to `next/og`.
+- Async APIs: `cookies`, `headers`, `draftMode`, and `params` return Promises—use `await` or `use()`.
+- Caching: Fetch requests aren’t cached by default; set `cache: "force-cache"` if needed.
+- Geo/IP: Removed from `NextRequest`; use `@vercel/functions` for `ipAddress` or `geolocation`.
+- Route Handlers: No caching unless explicitly set (`dynamic = "force-static"`).
+
+
+- Prefer ESM over CommonJS.
+- Avoid `any`; use `unknown`, generics, or precise types.
+- Remove and unused variables and expressions.
+- Use `as const` for exact object types.
+- Prefer `??` over `||` for nullish coalescing.
+- Handle promises with `await` or `.then()`.
+- Throw `Error` instances, not strings or objects.
+- Avoid non-null assertions (`!`) and redundant `?.!`.
+- Never use `eval()` or dynamic code execution.
+- Use `import` instead of `require()`.
+- Add comments for `@ts-<directive>` usage.
+- Favor functional programming; limit OOP to custom errors.
+- Ensure both operands of `+` are the same type.
+- Use namespaces only for declaration merging; avoid `module`.
+- Mark immutable component props as `readonly`.
+- Use optional chaining (`?.`) to prevent runtime errors.
+- Avoid redundant type annotations (e.g., `function Example() { return true; }`).
+- Prefer `[]` over generic array constructors.
+- Prevent duplicate values in enums and union types.
+
+
+- Maintain consistent spacing (e.g., `p-4`, `m-2`, `space-y-4`).
+- Combine conditional classes with `cn()`.
+- Use only custom colors defined in `globals.css`.
+- Ensure dark mode support via `.dark:` variants.
+
+
+- Import Shadcn primitives from `~/ui/primitives`.
+- Keep app-specific components in `~/ui/components`.
+- Match Shadcn design and naming conventions.
+- Style <Link> using `cn()` and `buttonVariants` when you need a button-like style.
+- Use <Button> only when you need to call a function.
+
+## Examples
+
+<example>
+  // server component
+  export default async function Page() {
+    const data = await getData(); // server action
+    return <div>{data}</div>;
+  }
+</example>
+
+<example type="invalid">
+  "use client";
+  export default async function Page() {
+    const data = await getData();
+    return <div>{data}</div>;
+  }
+</example>
+
+<example>
+  function parseData(data: unknown): string | null {
+    if (typeof data === "string") return data;
+    return null;
+  }
+</example>
+
+<example type="invalid">
+  function parseData(data: any): any {
+    return data;
+  }
+</example>
+
+
+<example>
+  import { cn } from "~/lib/utils";
+  
+  export function ExampleBox({ isActive }: { isActive: boolean }) {
+    return (
+      <div className={cn("p-4 rounded-md", isActive ? "bg-blue-500" : "")}>
+        Content
+      </div>
+    );
+  }
+</example>
+
+<example type="invalid">
+  <div style={{ padding: "20px" }}>Inline styled box</div>
+</example>
+
+## Tailwind v4 Updates
+
+- Config: `tailwind.config.ts` deprecated; now configure in `globals.css` with `@import "tailwindcss"`.
+- PostCSS: Plugin moved to `@tailwindcss/postcss`.
+- Utility Renames:
+  - `shadow-sm` → `shadow-xs`; `shadow` → `shadow-sm`; similar for `blur`, `drop-shadow`.
+  - `outline-none` → `outline-hidden`.
+  - `ring` defaults to 1px; use `ring-3` for old 3px behavior.
+- Removed Utilities: `bg-opacity-*`, `text-opacity-*`, `flex-shrink-*`, `flex-grow-*` → replaced by new patterns (`bg-black/50`, `shrink-*`, `grow-*`, etc.).
+- Placeholder Text: Now 50% of current color, not fixed gray.
+- Buttons: Default `cursor: default`.
+- Border Color: Defaults to `currentColor`.
+- `@layer`: `@layer utilities/components` replaced by `@utility`.
+- Variant Stacking: Applied left to right (e.g., `.hover:focus:bg-red-500`).
+- `space-y-*`: Uses new selector, may affect inline layouts.
+- Theming: Use `var(--color-...)` instead of `theme()` in CSS.
+
+
+## Available Shadcn UI Component Primitives
+
+Accordion, Alert, Alert Dialog, Aspect Ratio, Avatar, Badge, Breadcrumb, Button, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, Command, Context Menu, Data Table, Date Picker, Dialog, Drawer, Dropdown Menu, Form, Hover Card, Input, Input OTP, Label, Menubar, Navigation Menu, Pagination, Popover, Progress, Radio Group, Resizable, Scroll Area, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Switch, Table, Tabs, Textarea, Toast, Toggle, Toggle Group, Tooltip
+
+## Examples
+
+<example>
+  import { Button } from "~/ui/primitives/button";
+  
+  export function ConfirmButton() {
+    return <Button>Confirm</Button>;
+  }
+</example>
+
+<example type="invalid">
+  import { Button } from "shadcn-ui";
+  
+  export function ConfirmButton() {
+    return <Button>Confirm</Button>;
+  }
+</example>
+
+<example>
+
+  ```tsx
+  import { Link } from "next/link";
+  import { cn } from "~/lib/utils";
+  import { buttonVariants } from "~/ui/primitives/button";
+  
+  export function HomeLink() {
+    return (
+      <Link
+        href="/"
+        className={cn(
+          buttonVariants({
+            variant: "default",
+            className: "mx-auto mt-4 w-fit",
+          }),
+        )}
+      >
+        Home
+      </Link>
+    );
+  }
+  ```
+
+</example>
+
+<example type="invalid">
+  
+  ```tsx
+  import { Link } from "next/link";
+  import { Button } from "~/ui/primitives/button";
+  
+  export function HomeLink() {
+    return (
+      <Button
+        className="mx-auto mt-4 w-fit"
+      >
+        <Link href="/">Home</Link>
+      </Button>
+    );
+  }
+  ```
+
+</example>

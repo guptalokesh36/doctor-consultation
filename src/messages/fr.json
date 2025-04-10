@@ -1,0 +1,69 @@
+{
+  "TabTitles": {
+    "home": "Accueil - Consultation avec un médecin",
+    "about_us": "À propos de nous - Consultation médicale"
+  },
+  "HomePage": {
+    "title": "Consultez les meilleurs médecins en ligne",
+    "description": "Obtenez des conseils médicaux d'experts de professionnels de confiance, à tout moment, n'importe où.",
+    "button": "Réservez une consultation",
+    "features": {
+      "easyAccess": "Accès facile",
+      "easyAccessDesc": "Connectez-vous avec des médecins certifiés depuis le confort de votre domicile.",
+      "verifiedDoctors": "Médecins vérifiés",
+      "verifiedDoctorsDesc": "Tous nos médecins sont des professionnels agréés et expérimentés.",
+      "secureChat": "Chat sécurisé",
+      "secureChatDesc": "Communiquez en toute sécurité grâce à des messages cryptés de bout en bout."
+    }
+  },
+  "AboutPage": {
+    "aboutUsTitle": "À propos de nous - Consultation médicale",
+    "metaDescription": "En savoir plus sur Doctor Consultation, votre plateforme de consultation médicale en ligne de confiance.",
+
+    "aboutUs": "À propos de nous",
+    "whoWeAreTitle": "Qui sommes-nous",
+    "whoWeAreDescription": "Bienvenue sur Doctor Consultation, votre plateforme de confiance pour les consultations médicales en ligne. Nous offrons des soins de santé accessibles et de haute qualité, depuis le confort de votre domicile.",
+    "doctorImageAlt": "Un médecin consultant un patient en ligne",
+
+    "ourMissionTitle": "Notre mission",
+    "ourMissionDescription": "Chez Doctor Consultation, notre mission est de révolutionner les soins de santé en les rendant plus accessibles, pratiques et fiables pour tout le monde.",
+
+    "whyChooseUsTitle": "Pourquoi nous choisir ?",
+    "whyChooseUsImageAlt": "Médecin mesurant la pression artérielle d'un patient",
+    "expertDoctors": "Médecins experts :",
+    "expertDoctorsDescription": "Des professionnels de la santé hautement qualifiés.",
+    "convenience": "Commodité :",
+    "convenienceDescription": "Réservez et consultez depuis n'importe où.",
+    "secureConfidential": "Sécurisé & Confidentiel :",
+    "secureConfidentialDescription": "Vos données sont en sécurité avec nous.",
+    "affordableHealthcare": "Soins de santé abordables :",
+    "affordableHealthcareDescription": "Des services de qualité à des prix compétitifs.",
+    "support24x7": "Support 24/7 :",
+    "support24x7Description": "Toujours là pour vous aider.",
+
+    "howItWorksTitle": "Comment ça marche",
+    "step1": "Inscrivez-vous & Connectez-vous",
+    "step2": "Choisissez un médecin",
+    "step3": "Prenez un rendez-vous",
+    "step4": "Consultez en ligne",
+    "step5": "Recevez une ordonnance",
+
+    "contactUsTitle": "Contactez-nous",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "contactUsImageAlt": "Contacter le support client pour de l'aide"
+  },
+  "Footer": {
+    "brand_description": "Votre plateforme de consultation médicale en ligne de confiance.",
+    "quick_links": "Liens rapides",
+    "about_us": "À propos de nous",
+    "services": "Services",
+    "find_a_doctor": "Trouvez un médecin",
+    "contact": "Contact",
+    "contact_us": "Contactez-nous",
+    "email": "Email : support@doctorconsultation.com",
+    "phone": "Téléphone : +1 234 567 890",
+    "copyright": "Tous droits réservés."
+  }
+}

@@ -1,0 +1,2 @@
+export const APP_NAME: string = "Doctor Consultation";
+export const APP_DESCRIPTION: string = "A user-friendly and secure online platform that connects patients with licensed healthcare professionals for virtual consultations. Offering real-time video, voice, and text consultations, our app provides accessible medical advice, prescriptions, and follow-up care, all from the comfort of your home. Whether it's for a routine check-up, specialized care, or urgent medical needs, our app ensures timely and trusted healthcare at your fingertips.";
