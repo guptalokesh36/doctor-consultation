@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { bookAppointment } from "@/firebase/firebase";
+//import { bookAppointment } from "@/firebase/firebase";
 import { auth } from "@/firebase/firebase";
 import { Doctor } from "@/types";
 
@@ -12,11 +12,32 @@ export default function BookingForm({ doctor }: { doctor: Doctor }) {
 
   const handleBooking = async () => {
     if (!selectedDay || !selectedTime) return alert("Please pick a slot.");
+  
     const patientId = auth.currentUser?.uid;
-    const selectedDate = getNextDateFromWeekday(selectedDay); 
-    await bookAppointment(doctor.uid, patientId!, selectedDate, selectedTime);
-    alert("Appointment booked!");
+    const selectedDate = getNextDateFromWeekday(selectedDay);
+  
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: auth.currentUser?.email,
+        amount: 2000,
+        doctorId: doctor.uid,
+        patientId,
+        date: selectedDate,
+        time: selectedTime,
+      }),
+    });
+  
+    const { url } = await res.json();
+  
+    if (url) {
+      window.location.href = url;
+    } else {
+      alert("Something went wrong.");
+    }
   };
+  
 
   return (
     <div className="mt-6">

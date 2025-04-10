@@ -48,7 +48,12 @@ export function Header({ children }: { children: ReactNode }) {
         <div className="flex items-center justify-center ">
           {children}
           {role === "admin" && <NavLink href="/dashboard">Dashboard</NavLink>}
-          {role === "user" && <NavLink href="/doctors">Doctors</NavLink>}
+          {role === "user" && 
+          <>
+          <NavLink href="/doctors">Doctors</NavLink>
+          <NavLink href="/bookings">Bookings</NavLink> 
+          </>
+          }
           {role === "doctor" && <NavLink href="/patients">Patients</NavLink>}
 
           <LanguageSwitcher />

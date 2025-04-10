@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe-server";
 
 export async function POST(req: NextRequest) {
-  const { amount, email } = await req.json();
+  const { amount, email, doctorId, patientId, date, time } = await req.json();
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -20,6 +20,12 @@ export async function POST(req: NextRequest) {
         quantity: 1,
       },
     ],
+    metadata: {
+      doctorId,
+      patientId,
+      date,
+      time,
+    },
     success_url: `${req.nextUrl.origin}/success`,
     cancel_url: `${req.nextUrl.origin}/cancel`,
   });
