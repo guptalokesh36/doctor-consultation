@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { db, auth } from "@/firebase/firebase";
 import {
@@ -10,6 +10,7 @@ import {
   orderBy,
   query,
   doc,
+  getDoc,
   serverTimestamp,
   Timestamp,
   setDoc,
@@ -22,13 +23,20 @@ interface Message {
   timestamp: Timestamp;
 }
 
+interface UserInfo {
+  name: string;
+}
+
 export default function ChatPage() {
   const { chatPartnerId } = useParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [canChat, setCanChat] = useState(false);
-
+  const [partnerInfo, setPartnerInfo] = useState<UserInfo | null>(null);
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
+
+  const chatBoxRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const chatId = [currentUser?.uid, chatPartnerId].sort().join("_");
 
@@ -68,6 +76,30 @@ export default function ChatPage() {
     return () => unsubscribe();
   }, [chatId, canChat, currentUser]);
 
+  useEffect(() => {
+    const fetchChatPartnerInfo = async () => {
+      if (!chatPartnerId) return;
+
+      const partnerRef = doc(db, "user", chatPartnerId as string);
+      const snap = await getDoc(partnerRef);
+
+      if (snap.exists()) {
+        const data = snap.data();
+        setPartnerInfo({
+          name: data.displayName ?? "Unknown",
+        });
+      }
+    };
+
+    fetchChatPartnerInfo();
+  }, [chatPartnerId]);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [messages]);
+
   const sendMessage = async () => {
     if (!input.trim() || !currentUser) return;
 
@@ -80,7 +112,7 @@ export default function ChatPage() {
     const [uid1, uid2] = [currentUser.uid, chatPartnerId as string].sort();
 
     await setDoc(doc(db, "chats", `${uid1}_${uid2}`), {
-      doctorId: uid1, // optional refinement based on user roles
+      doctorId: uid1,
       patientId: uid2,
       lastMessage: input,
       updatedAt: serverTimestamp(),
@@ -100,8 +132,16 @@ export default function ChatPage() {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-4">Chat</h1>
-      <div className="border rounded p-4 h-96 overflow-y-auto bg-secondary shadow-sm mb-4">
+      <h1 className="text-2xl font-semibold mb-2">Chat</h1>
+      {partnerInfo && (
+        <h2 className="text-lg text-muted-foreground mb-4">
+          Chatting with: <strong>{partnerInfo.name}</strong>
+        </h2>
+      )}
+      <div
+        ref={chatBoxRef}
+        className="border rounded p-4 h-96 overflow-y-auto bg-secondary shadow-sm mb-4"
+      >
         {messages.map((msg, idx) => (
           <div
             key={idx}
@@ -109,17 +149,29 @@ export default function ChatPage() {
               msg.senderId === currentUser?.uid ? "text-right" : "text-left"
             }`}
           >
-            <span className="bg-secondary-foreground text-background px-3 py-1 rounded inline-block max-w-xs break-words">
-              {msg.text}
-            </span>
+            <div className="inline-block">
+              <span className="bg-secondary-foreground text-background px-3 py-1 rounded inline-block max-w-xs break-words">
+                {msg.text}
+              </span>
+              <div className="text-xs text-muted-foreground mt-1">
+                {msg.timestamp?.toDate().toLocaleString()}
+              </div>
+            </div>
           </div>
         ))}
+        <div ref={bottomRef} />
       </div>
       <div className="flex gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
           placeholder="Type a message"
           className="flex-grow px-3 py-2 border rounded"
         />

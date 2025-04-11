@@ -19,10 +19,15 @@ export async function POST(req: NextRequest) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (err: any) {
-    console.error("❌ Webhook signature verification failed:", err.message);
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("❌ Webhook signature verification failed:", err.message);
+    } else {
+      console.error("❌ Webhook verification failed with unknown error:", err);
+    }
     return new Response("Webhook Error", { status: 400 });
   }
+
 
   // ✅ Handle event type
   switch (event.type) {
@@ -36,14 +41,14 @@ export async function POST(req: NextRequest) {
 
       if (doctorId && patientId && date && time) {
         try {
-            await addDoc(collection(db, "bookings"), {
-                doctorId,
-                patientId,
-                date,
-                time,
-                status: "confirmed",
-                createdAt: Timestamp.now(),
-              });
+          await addDoc(collection(db, "bookings"), {
+            doctorId,
+            patientId,
+            date,
+            time,
+            status: "confirmed",
+            createdAt: Timestamp.now(),
+          });
           console.log("✅ Booking recorded successfully.");
         } catch (error) {
           console.error("🔥 Failed to store booking:", error);

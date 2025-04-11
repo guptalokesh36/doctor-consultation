@@ -26,8 +26,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Header>
-              <NavLink href="/about">About</NavLink>            
-             
+              <NavLink href="/about">About</NavLink>
             </Header>
             {children}
             <Footer />

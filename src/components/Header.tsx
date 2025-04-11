@@ -52,9 +52,15 @@ export function Header({ children }: { children: ReactNode }) {
           <>
           <NavLink href="/doctors">Doctors</NavLink>
           <NavLink href="/bookings">Bookings</NavLink> 
+          <NavLink href="/chat">Chats</NavLink>   
           </>
           }
-          {role === "doctor" && <NavLink href="/patients">Patients</NavLink>}
+          {role === "doctor" && 
+          <>
+          <NavLink href="/patients">Patients</NavLink>
+          <NavLink href="/chat">Chats</NavLink>   
+          </>
+          }
 
           <LanguageSwitcher />
           <ThemeToggle />
