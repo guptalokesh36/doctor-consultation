@@ -95,8 +95,9 @@ export default function ChatPage() {
   }, [chatPartnerId]);
 
   useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    const container = chatBoxRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
     }
   }, [messages]);
 
@@ -123,37 +124,44 @@ export default function ChatPage() {
 
   if (!canChat) {
     return (
-      <div className="p-6">
+      <div className="p-6 text-center">
         <h2 className="text-xl font-bold">Chat Access Denied</h2>
-        <p>You must have a confirmed appointment to chat.</p>
+        <p className="text-muted-foreground mt-2">
+          You must have a confirmed appointment to chat.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-2">Chat</h1>
-      {partnerInfo && (
-        <h2 className="text-lg text-muted-foreground mb-4">
-          Chatting with: <strong>{partnerInfo.name}</strong>
-        </h2>
-      )}
+    <div className="max-w-xl mx-auto p-4 flex flex-col h-[90vh]">
+      {/* Header */}
+      <div className="mb-4">
+        <h1 className="text-2xl font-semibold">Chat</h1>
+        {partnerInfo && (
+          <p className="text-sm text-muted-foreground">
+            Chatting with <strong>{partnerInfo.name}</strong>
+          </p>
+        )}
+      </div>
+
+      {/* Messages */}
       <div
         ref={chatBoxRef}
-        className="border rounded p-4 h-96 overflow-y-auto bg-secondary shadow-sm mb-4"
+        className="flex-1 border rounded p-4 overflow-y-auto bg-secondary shadow-sm"
       >
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`my-2 ${
-              msg.senderId === currentUser?.uid ? "text-right" : "text-left"
+            className={`my-2 flex ${
+              msg.senderId === currentUser?.uid ? "justify-end" : "justify-start"
             }`}
           >
-            <div className="inline-block">
-              <span className="bg-secondary-foreground text-background px-3 py-1 rounded inline-block max-w-xs break-words">
+            <div className="max-w-xs">
+              <div className="bg-secondary-foreground text-background px-3 py-2 rounded-lg shadow-sm">
                 {msg.text}
-              </span>
-              <div className="text-xs text-muted-foreground mt-1">
+              </div>
+              <div className="text-xs text-muted-foreground mt-1 text-right">
                 {msg.timestamp?.toDate().toLocaleString()}
               </div>
             </div>
@@ -161,7 +169,9 @@ export default function ChatPage() {
         ))}
         <div ref={bottomRef} />
       </div>
-      <div className="flex gap-2">
+
+      {/* Input */}
+      <div className="flex gap-2 mt-4">
         <input
           type="text"
           value={input}
@@ -173,11 +183,11 @@ export default function ChatPage() {
             }
           }}
           placeholder="Type a message"
-          className="flex-grow px-3 py-2 border rounded"
+          className="flex-grow px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           Send
         </button>

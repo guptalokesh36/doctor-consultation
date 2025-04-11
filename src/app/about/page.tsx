@@ -26,93 +26,75 @@ export default function AboutPage() {
       <Head>
         <title>{t("aboutUsTitle", { appName: APP_NAME })}</title>
         <meta name="description" content={t("metaDescription")} />
-        <meta
-          property="og:title"
-          content={t("aboutUsTitle", { appName: APP_NAME })}
-        />
+        <meta property="og:title" content={t("aboutUsTitle", { appName: APP_NAME })} />
         <meta property="og:description" content={t("metaDescription")} />
         <meta property="og:image" content="/assets/doctor-consultation.jpg" />
       </Head>
 
-      <div className="container mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-center mb-6 text-primary">
-          {t("aboutUs")}
-        </h1>
+      <div className="container mx-auto px-6 py-12 text-primary">
+        <h1 className="text-4xl font-bold text-center mb-12">{t("aboutUs")}</h1>
 
-        {/* Who We Are Section */}
-        <section className="mb-12 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-semibold mb-4">
-              {t("whoWeAreTitle")}
-            </h2>
-            <p className="text-gray-600">{t("whoWeAreDescription")}</p>
+        {/* Who We Are */}
+        <section className="flex flex-col md:flex-row items-center gap-8 mb-16">
+          <div className="md:w-1/2 space-y-4">
+            <h2 className="text-3xl font-semibold">{t("whoWeAreTitle")}</h2>
+            <p className="text-muted-foreground">{t("whoWeAreDescription")}</p>
           </div>
-          <div className="md:w-1/2 mt-6 md:mt-0">
+          <div className="md:w-1/2">
             <Image
               src={doctorImage}
               alt={t("doctorImageAlt")}
               width={500}
               height={300}
-              className="rounded-lg shadow-lg"
+              className="rounded-xl shadow-lg"
               priority
             />
           </div>
         </section>
 
-        {/* Mission Section */}
-        <section className="mb-12 bg-gray-100 p-6 rounded-lg shadow-md">
-          <h2 className="text-3xl font-semibold text-center">
-            {t("ourMissionTitle")}
-          </h2>
-          <p className="text-gray-600 text-center mt-4">
-            {t("ourMissionDescription")}
-          </p>
+        {/* Mission */}
+        <section className="bg-secondary rounded-xl shadow p-8 text-center mb-16">
+          <h2 className="text-3xl font-semibold">{t("ourMissionTitle")}</h2>
+          <p className="mt-4 text-muted-foreground">{t("ourMissionDescription")}</p>
         </section>
 
         {/* Why Choose Us */}
-        <section className="mb-12 flex flex-col md:flex-row items-center">
+        <section className="flex flex-col md:flex-row items-center gap-8 mb-16">
           <div className="md:w-1/2">
             <Image
               src={whyChooseUs}
               alt={t("whyChooseUsImageAlt")}
               width={500}
               height={300}
-              className="rounded-lg shadow-lg"
+              className="rounded-xl shadow-lg"
             />
           </div>
-          <div className="md:w-1/2 mt-6 md:mt-0">
-            <h2 className="text-3xl font-semibold mb-4">
-              {t("whyChooseUsTitle")}
-            </h2>
-            <ul className="list-disc list-inside text-gray-600 space-y-2">
+          <div className="md:w-1/2 space-y-4">
+            <h2 className="text-3xl font-semibold">{t("whyChooseUsTitle")}</h2>
+            <ul className="list-disc list-inside text-muted-foreground space-y-2">
               <li>
-                <strong>{t("expertDoctors")}</strong>{" "}
-                {t("expertDoctorsDescription")}
+                <strong>{t("expertDoctors")}</strong> {t("expertDoctorsDescription")}
               </li>
               <li>
-                <strong>{t("convenience")}</strong>{" "}
-                {t("convenienceDescription")}
+                <strong>{t("convenience")}</strong> {t("convenienceDescription")}
               </li>
               <li>
-                <strong>{t("secureConfidential")}</strong>{" "}
-                {t("secureConfidentialDescription")}
+                <strong>{t("secureConfidential")}</strong> {t("secureConfidentialDescription")}
               </li>
               <li>
-                <strong>{t("affordableHealthcare")}</strong>{" "}
-                {t("affordableHealthcareDescription")}
+                <strong>{t("affordableHealthcare")}</strong> {t("affordableHealthcareDescription")}
               </li>
               <li>
-                <strong>{t("support24x7")}</strong>{" "}
-                {t("support24x7Description")}
+                <strong>{t("support24x7")}</strong> {t("support24x7Description")}
               </li>
             </ul>
           </div>
         </section>
 
         {/* How It Works */}
-        <section className="mb-12 bg-gray-100 p-6 rounded-lg shadow-md text-center">
+        <section className="bg-secondary rounded-xl shadow p-8 text-center mb-16">
           <h2 className="text-3xl font-semibold">{t("howItWorksTitle")}</h2>
-          <ol className="list-decimal list-inside text-gray-600 mt-4 space-y-2">
+          <ol className="list-decimal list-inside text-muted-foreground mt-4 space-y-2">
             <li>{t("step1")}</li>
             <li>{t("step2")}</li>
             <li>{t("step3")}</li>
@@ -122,26 +104,20 @@ export default function AboutPage() {
         </section>
 
         {/* Contact Us */}
-        <section className="mb-12 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-semibold mb-4">
-              {t("contactUsTitle")}
-            </h2>
-            <p className="text-gray-600">
-              📧 {t("email")}: support@doctorconsultation.com
-            </p>
-            <p className="text-gray-600">📞 {t("phone")}: +1 234 567 890</p>
-            <p className="text-gray-600">
-              📍 {t("address")}: 123 Health St, Wellness City, Country
-            </p>
+        <section className="flex flex-col md:flex-row items-center gap-8 mb-6">
+          <div className="md:w-1/2 space-y-3">
+            <h2 className="text-3xl font-semibold">{t("contactUsTitle")}</h2>
+            <p className="text-muted-foreground">📧 {t("email")}: support@doctorconsultation.com</p>
+            <p className="text-muted-foreground">📞 {t("phone")}: +1 234 567 890</p>
+            <p className="text-muted-foreground">📍 {t("address")}: 123 Health St, Wellness City, Country</p>
           </div>
-          <div className="md:w-1/2 mt-6 md:mt-0">
+          <div className="md:w-1/2">
             <Image
               src={contactUs}
               alt={t("contactUsImageAlt")}
               width={500}
               height={300}
-              className="rounded-lg shadow-lg"
+              className="rounded-xl shadow-lg"
             />
           </div>
         </section>

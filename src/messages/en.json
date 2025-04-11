@@ -1,7 +1,8 @@
 {
   "TabTitles": {
     "home": "Home - Doctor Consultation",
-    "about_us":"About Us - Doctor Consultation"
+    "about_us": "About Us - Doctor Consultation",
+    "services": "Our Services - Doctor Consultation"
   },
   "HomePage": {
     "title": "Consult with Top Doctors Online",
@@ -67,5 +68,33 @@
     "email": "Email: support@doctorconsultation.com",
     "phone": "Phone: +1 234 567 890",
     "copyright": "All rights reserved."
+  },
+  "Header": {
+    "about": "About Us",
+    "services": "Services",
+    "dashboard": "Dashboard",
+    "doctors": "Doctors",
+    "bookings": "Bookings",
+    "chats": "Chats",
+    "patients": "Patients",
+    "availability": "Availability",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "ServicesPage": {
+    "title": "Our Services",
+    "description": "We offer a wide range of professional medical services to ensure your health and convenience.",
+    "onlineConsultation": "Online Consultation",
+    "onlineConsultationDesc": "Connect with licensed doctors via video, chat, or call from the comfort of your home.",
+    "specialistAccess": "Access to Specialists",
+    "specialistAccessDesc": "Get expert opinions from certified specialists in various medical fields.",
+    "followUpCare": "Follow-up Care",
+    "followUpCareDesc": "Book follow-ups with the same doctor to ensure consistent and continued care.",
+    "healthCheckups": "Routine Check-ups",
+    "healthCheckupsDesc": "Schedule regular check-ups to stay on top of your health.",
+    "flexibleTiming": "Flexible Timing",
+    "flexibleTimingDesc": "Choose appointment slots that best fit your schedule, even on weekends.",
+    "privacySecurity": "Privacy & Security",
+    "privacySecurityDesc": "All consultations are encrypted and your medical data is secured."
   }
 }

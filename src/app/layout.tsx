@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { APP_NAME, APP_DESCRIPTION } from "@/lib/constants";
-
+import { Toaster } from "sonner";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Header, NavLink } from "@/components/Header";
+import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -25,9 +25,9 @@ export default async function RootLayout({
       <body className="m-2">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header>
-              <NavLink href="/about">About</NavLink>
-            </Header>
+            <Header />
+
+            <Toaster />
             {children}
             <Footer />
           </ThemeProvider>

@@ -19,21 +19,22 @@ interface Booking {
 }
 
 interface GroupedPatient {
+  id: string;
   patientName: string;
   patientEmail: string;
-  id: string; // ✅ add this
   appointments: { date: string; time: string }[];
 }
 
-
 export default function PatientsPage() {
-  const [patients, setPatients] = useState<GroupedPatient[]>([]);
+  const [upcomingPatients, setUpcomingPatients] = useState<GroupedPatient[]>([]);
+  const [pastPatients, setPastPatients] = useState<GroupedPatient[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        setPatients([]);
+        setUpcomingPatients([]);
+        setPastPatients([]);
         setLoading(false);
         return;
       }
@@ -45,11 +46,14 @@ export default function PatientsPage() {
       );
 
       const snap = await getDocs(q);
+      const groupedUpcoming: Record<string, GroupedPatient> = {};
+      const groupedPast: Record<string, GroupedPatient> = {};
 
-      const grouped: Record<string, GroupedPatient> = {};
+      const today = new Date().toISOString().split("T")[0];
 
       for (const docSnap of snap.docs) {
         const data = docSnap.data() as Booking;
+        const isUpcoming = data.date >= today;
 
         const patientRef = doc(db, "user", data.patientId);
         const patientSnap = await getDoc(patientRef);
@@ -58,67 +62,84 @@ export default function PatientsPage() {
           ? patientSnap.data()
           : { displayName: "Unknown", email: "N/A" };
 
-          if (!grouped[data.patientId]) {
-            grouped[data.patientId] = {
-              id: data.patientId, // ✅ include patientId here
-              patientName: patientData.displayName,
-              patientEmail: patientData.email,
-              appointments: [],
-            };
-          }
-          
+        const targetGroup = isUpcoming ? groupedUpcoming : groupedPast;
 
-        grouped[data.patientId].appointments.push({
+        if (!targetGroup[data.patientId]) {
+          targetGroup[data.patientId] = {
+            id: data.patientId,
+            patientName: patientData.displayName,
+            patientEmail: patientData.email,
+            appointments: [],
+          };
+        }
+
+        targetGroup[data.patientId].appointments.push({
           date: data.date,
           time: data.time,
         });
       }
 
-      const finalList = Object.values(grouped);
-      setPatients(finalList);
+      setUpcomingPatients(Object.values(groupedUpcoming));
+      setPastPatients(Object.values(groupedPast));
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Your Patients</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : patients.length === 0 ? (
-        <p>No patients have booked appointments yet.</p>
+  const renderPatients = (title: string, patients: GroupedPatient[]) => (
+    <div className="mt-8">
+      <h2 className="text-xl font-bold mb-4">{title}</h2>
+      {patients.length === 0 ? (
+        <p className="text-muted-foreground">No {title.toLowerCase()} patients.</p>
       ) : (
         <ul className="space-y-6">
-          {patients.map((booking, idx) => (
+          {patients.map((patient, idx) => (
             <li
               key={idx}
-              className="p-4 border rounded bg-secondary text-primary shadow"
+              className="p-6 border rounded-lg bg-secondary text-primary shadow-md"
             >
-              <p>
-                <strong>Patient:</strong> {booking.patientName}
-              </p>
-              <p>
-                <strong>Email:</strong> {booking.patientEmail}
-              </p>
-              <p className="mt-2 font-semibold">Appointments:</p>
-              <ul className="ml-4 list-disc">
-                {booking.appointments.map((appt, i) => (
-                  <li key={i}>
-                    {appt.date} at {appt.time}
-                  </li>
-                ))}
-              <button
-                onClick={() => (window.location.href = `/chat/${booking.id}`)}
-                className="mt-2 px-3 py-1 bg-blue-600 text-white rounded"
-              >
-                Message
-              </button>
-              </ul>
+              <div className="mb-2">
+                <p className="text-lg font-semibold">👤 {patient.patientName}</p>
+                <p className="text-sm text-muted-foreground">{patient.patientEmail}</p>
+              </div>
+
+              <div className="mt-4">
+                <p className="font-medium mb-1">Appointments:</p>
+                <ul className="ml-4 list-disc text-sm space-y-1">
+                  {patient.appointments.map((appt, i) => (
+                    <li key={i}>
+                      {appt.date} at {appt.time}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-4 text-right">
+                <button
+                  onClick={() => (window.location.href = `/chat/${patient.id}`)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                >
+                  Message
+                </button>
+              </div>
             </li>
           ))}
         </ul>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="p-6 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Your Patients</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {renderPatients("Upcoming Appointments", upcomingPatients)}
+          {renderPatients("Past Appointments", pastPatients)}
+        </>
       )}
     </div>
   );

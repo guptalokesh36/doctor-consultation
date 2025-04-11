@@ -1,7 +1,10 @@
 export default function LoadingPage() {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="border-4 border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+    <div className="flex items-center justify-center h-screen bg-background text-foreground">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 rounded-full border-4 border-t-transparent border-primary animate-spin" />
+        <span className="sr-only">Loading...</span>
+      </div>
     </div>
   );
 }

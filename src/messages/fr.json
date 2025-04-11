@@ -1,7 +1,8 @@
 {
   "TabTitles": {
     "home": "Accueil - Consultation avec un médecin",
-    "about_us": "À propos de nous - Consultation médicale"
+    "about_us": "À propos de nous - Consultation médicale",
+    "services": "Nos Services - Consultation Médicale"
   },
   "HomePage": {
     "title": "Consultez les meilleurs médecins en ligne",
@@ -65,5 +66,33 @@
     "email": "Email : support@doctorconsultation.com",
     "phone": "Téléphone : +1 234 567 890",
     "copyright": "Tous droits réservés."
+  },
+  "Header": {
+    "about": "हमारे बारे में",
+    "services": "सेवाएँ",
+    "dashboard": "Tableau de bord",
+    "doctors": "Médecins",
+    "bookings": "Réservations",
+    "chats": "Discussions",
+    "patients": "Patients",
+    "availability": "Disponibilité",
+    "logout": "Se déconnecter",
+    "login": "Se connecter"
+  },
+  "ServicesPage": {
+    "title": "Nos Services",
+    "description": "Nous proposons une large gamme de services médicaux professionnels pour assurer votre santé et votre confort.",
+    "onlineConsultation": "Consultation en Ligne",
+    "onlineConsultationDesc": "Consultez des médecins agréés par vidéo, chat ou appel, depuis le confort de votre domicile.",
+    "specialistAccess": "Accès aux Spécialistes",
+    "specialistAccessDesc": "Obtenez l’avis d’experts certifiés dans divers domaines médicaux.",
+    "followUpCare": "Soins de Suivi",
+    "followUpCareDesc": "Prenez rendez-vous avec le même médecin pour un suivi cohérent et continu.",
+    "healthCheckups": "Bilans de Santé",
+    "healthCheckupsDesc": "Planifiez des bilans réguliers pour surveiller votre état de santé.",
+    "flexibleTiming": "Horaires Flexibles",
+    "flexibleTimingDesc": "Choisissez des créneaux horaires adaptés à votre emploi du temps, même le week-end.",
+    "privacySecurity": "Confidentialité & Sécurité",
+    "privacySecurityDesc": "Toutes les consultations sont chiffrées et vos données médicales sont protégées."
   }
 }

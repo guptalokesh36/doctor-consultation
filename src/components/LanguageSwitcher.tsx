@@ -1,60 +1,57 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils"; // optional utility for conditional class names (if you use one)
 
 export default function LanguageSwitcher() {
-  const [local, setLocal] = useState<string>("");
+  const [locale, setLocale] = useState<string>("en");
   const router = useRouter();
 
   useEffect(() => {
-    const cookieLocal = document.cookie
+    const cookieLocale = document.cookie
       .split("; ")
       .find((row) => row.startsWith("MYNEXTDOCTOR_LOCALE="))
       ?.split("=")[1];
 
-    if (cookieLocal) {
-      setLocal(cookieLocal);
+    if (cookieLocale) {
+      setLocale(cookieLocale);
     } else {
       const browserLang = navigator.language.slice(0, 2);
-      setLocal(browserLang);
+      setLocale(browserLang);
       document.cookie = `MYNEXTDOCTOR_LOCALE=${browserLang}; path=/`;
     }
   }, []);
 
   const handleLanguageChange = (lang: string) => {
-    setLocal(lang);
+    setLocale(lang);
     document.cookie = `MYNEXTDOCTOR_LOCALE=${lang}; path=/`;
-    router.refresh();
+    router.refresh(); // re-fetch data and translations
   };
+
+  const languages = [
+    { code: "en", label: "English" },
+    { code: "fr", label: "Français" },
+    { code: "hn", label: "हिन्दी" },
+  ];
+
   return (
-    <div className="flex">
-      <button
-        onClick={() => handleLanguageChange("en")}
-        className={
-          "px-4 py-6 gap-1 hover:bg-secondary hover:text-secondary-foreground focus-visible:bg-secondary focus-visible:text-secondary-foreground" +
-          (local === "en" ? " bg-secondary text-secondary-foreground" : "")
-        }
-      >
-        English
-      </button>
-      <button
-        onClick={() => handleLanguageChange("fr")}
-        className={
-          "px-4 py-6 gap-1 hover:bg-secondary hover:text-secondary-foreground focus-visible:bg-secondary focus-visible:text-secondary-foreground" +
-          (local === "fr" ? " bg-secondary text-secondary-foreground" : "")
-        }
-      >
-        français
-      </button>
-      <button
-        onClick={() => handleLanguageChange("hn")}
-        className={
-          "px-4 py-6 gap-1 hover:bg-secondary hover:text-secondary-foreground focus-visible:bg-secondary focus-visible:text-secondary-foreground" +
-          (local === "hn" ? " bg-secondary text-secondary-foreground" : "")
-        }
-      >
-        हिन्दी
-      </button>
+    <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg shadow-sm">
+      {languages.map((lang) => (
+        <button
+          key={lang.code}
+          onClick={() => handleLanguageChange(lang.code)}
+          className={cn(
+            "px-3 py-1 text-sm font-medium rounded transition",
+            "hover:bg-primary hover:text-primary-foreground",
+            locale === lang.code
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground"
+          )}
+        >
+          {lang.label}
+        </button>
+      ))}
     </div>
   );
 }

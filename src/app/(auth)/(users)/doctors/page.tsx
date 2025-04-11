@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { getDoctors } from "@/firebase/firebase";
-import { User2 } from "lucide-react"; // Optional: Icon for user avatar
+import { User2 } from "lucide-react"; 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 

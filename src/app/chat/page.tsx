@@ -46,7 +46,10 @@ export default function ChatInboxPage() {
         orderBy("updatedAt", "desc")
       );
 
-      const [snap1, snap2] = await Promise.all([getDocs(qDoctor), getDocs(qPatient)]);
+      const [snap1, snap2] = await Promise.all([
+        getDocs(qDoctor),
+        getDocs(qPatient),
+      ]);
       const allDocs = [...snap1.docs, ...snap2.docs];
 
       const results: ChatPreview[] = await Promise.all(
@@ -68,7 +71,6 @@ export default function ChatInboxPage() {
         })
       );
 
-    //  console.log("Fetched chats:", results);
       setChats(results);
       setLoading(false);
     });
@@ -77,10 +79,11 @@ export default function ChatInboxPage() {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Recent Chats</h1>
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Recent Chats</h1>
+
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-muted-foreground">Loading...</p>
       ) : chats.length === 0 ? (
         <p className="text-muted-foreground">No recent chats yet.</p>
       ) : (
@@ -88,21 +91,28 @@ export default function ChatInboxPage() {
           {chats.map((chat) => (
             <li
               key={chat.id}
-              className="p-4 border rounded shadow bg-secondary flex justify-between items-center"
+              className="p-4 border border-border rounded-lg bg-secondary hover:shadow-sm transition-all"
             >
-              <div>
-                <p className="font-medium">{chat.otherUserName}</p>
-                <p className="text-sm text-muted-foreground line-clamp-1">
-                  {chat.lastMessage}
-                </p>
-                <p className="text-xs text-gray-500">{chat.updatedAt}</p>
+              <div className="flex justify-between items-center gap-4">
+                <div className="flex flex-col flex-grow">
+                  <p className="font-semibold text-primary text-base">
+                    {chat.otherUserName}
+                  </p>
+                  <p className="text-sm text-muted-foreground line-clamp-1 mt-1">
+                    {chat.lastMessage}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {chat.updatedAt}
+                  </p>
+                </div>
+
+                <Link
+                  href={`/chat/${chat.otherUserId}`}
+                  className="text-blue-600 hover:underline text-sm font-medium whitespace-nowrap"
+                >
+                  Open
+                </Link>
               </div>
-              <Link
-                href={`/chat/${chat.otherUserId}`}
-                className="text-blue-600 hover:underline"
-              >
-                Open
-              </Link>
             </li>
           ))}
         </ul>
