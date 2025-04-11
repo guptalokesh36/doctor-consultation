@@ -21,8 +21,10 @@ interface Booking {
 interface GroupedPatient {
   patientName: string;
   patientEmail: string;
+  id: string; // ✅ add this
   appointments: { date: string; time: string }[];
 }
+
 
 export default function PatientsPage() {
   const [patients, setPatients] = useState<GroupedPatient[]>([]);
@@ -56,13 +58,15 @@ export default function PatientsPage() {
           ? patientSnap.data()
           : { displayName: "Unknown", email: "N/A" };
 
-        if (!grouped[data.patientId]) {
-          grouped[data.patientId] = {
-            patientName: patientData.displayName,
-            patientEmail: patientData.email,
-            appointments: [],
-          };
-        }
+          if (!grouped[data.patientId]) {
+            grouped[data.patientId] = {
+              id: data.patientId, // ✅ include patientId here
+              patientName: patientData.displayName,
+              patientEmail: patientData.email,
+              appointments: [],
+            };
+          }
+          
 
         grouped[data.patientId].appointments.push({
           date: data.date,
@@ -88,7 +92,10 @@ export default function PatientsPage() {
       ) : (
         <ul className="space-y-6">
           {patients.map((booking, idx) => (
-            <li key={idx} className="p-4 border rounded bg-secondary text-primary shadow">
+            <li
+              key={idx}
+              className="p-4 border rounded bg-secondary text-primary shadow"
+            >
               <p>
                 <strong>Patient:</strong> {booking.patientName}
               </p>
@@ -102,6 +109,12 @@ export default function PatientsPage() {
                     {appt.date} at {appt.time}
                   </li>
                 ))}
+              <button
+                onClick={() => (window.location.href = `/chat/${booking.id}`)}
+                className="mt-2 px-3 py-1 bg-blue-600 text-white rounded"
+              >
+                Message
+              </button>
               </ul>
             </li>
           ))}

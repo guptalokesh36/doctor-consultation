@@ -77,7 +77,10 @@ export default function BookingsPage() {
       ) : (
         <ul className="space-y-4">
           {bookings.map((booking, idx) => (
-            <li key={idx} className="p-4 border rounded shadow-sm bg-secondary text-primary">
+            <li
+              key={idx}
+              className="p-4 border rounded shadow-sm bg-secondary text-primary"
+            >
               <p>
                 <strong>Doctor:</strong> {booking.doctorName}
               </p>
@@ -87,6 +90,14 @@ export default function BookingsPage() {
               <p>
                 <strong>Time:</strong> {booking.time}
               </p>
+              <button
+                onClick={() =>
+                  (window.location.href = `/chat/${booking.doctorId}`)
+                }
+                className="mt-2 px-3 py-1 bg-blue-600 text-white rounded"
+              >
+                Message Doctor
+              </button>
             </li>
           ))}
         </ul>
