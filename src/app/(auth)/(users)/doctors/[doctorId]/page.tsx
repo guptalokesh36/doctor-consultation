@@ -3,13 +3,11 @@ import { notFound } from "next/navigation";
 import DoctorProfileClient from "@/components/DoctorProfileClient";
 
 interface DoctorProfilePageProps {
-  params: { doctorId: string };
+  params: Promise<{ doctorId: string }>;
 }
 
-export default async function DoctorProfilePage({
-  params,
-}: DoctorProfilePageProps) {
-  const { doctorId } = params;
+export default async function DoctorProfilePage({ params }: DoctorProfilePageProps) {
+  const { doctorId } = await params;
   const doctor = await getDoctorById(doctorId);
 
   if (!doctor) return notFound();
@@ -23,14 +21,11 @@ export default async function DoctorProfilePage({
           <p className="text-muted-foreground mb-1">{doctor.email}</p>
           {doctor.specialization && (
             <p className="text-sm font-medium text-foreground mb-1">
-              <span className="text-muted-foreground">Specialization:</span>{" "}
-              {doctor.specialization}
+              <span className="text-muted-foreground">Specialization:</span> {doctor.specialization}
             </p>
           )}
           {doctor.bio && (
-            <p className="text-sm text-muted-foreground mt-2 italic">
-              {doctor.bio}
-            </p>
+            <p className="text-sm text-muted-foreground mt-2 italic">{doctor.bio}</p>
           )}
         </div>
 
