@@ -21,14 +21,12 @@ export default async function DoctorProfilePage({
         <div className="flex-1">
           <h1 className="text-3xl font-bold mb-2">{doctor.displayName}</h1>
           <p className="text-muted-foreground mb-1">{doctor.email}</p>
-
           {doctor.specialization && (
             <p className="text-sm font-medium text-foreground mb-1">
               <span className="text-muted-foreground">Specialization:</span>{" "}
               {doctor.specialization}
             </p>
           )}
-
           {doctor.bio && (
             <p className="text-sm text-muted-foreground mt-2 italic">
               {doctor.bio}
