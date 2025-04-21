@@ -7,12 +7,12 @@ import { useTranslations } from "next-intl";
 import { APP_NAME } from "@/lib/constants";
 import { getMessages } from "next-intl/server";
 
-export async function generateMetadata({
-  params: { locale },
-}: {
+type AboutPageParams = {
   params: { locale: string };
-}) {
-  const messages = await getMessages({ locale });
+};
+
+export async function generateMetadata({ params }: AboutPageParams) {
+  const messages = await getMessages({ locale: params.locale });
   return {
     title: messages?.TabTitles?.about_us || "Doctor Consultation",
   };
