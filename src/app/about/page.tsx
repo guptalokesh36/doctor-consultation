@@ -7,12 +7,13 @@ import { useTranslations } from "next-intl";
 import { APP_NAME } from "@/lib/constants";
 import { getMessages } from "next-intl/server";
 
-type AboutPageParams = {
-  params: { locale: string };
+type AboutPageProps = {
+  params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata({ params }: AboutPageParams) {
-  const messages = await getMessages({ locale: params.locale });
+export async function generateMetadata({ params }: AboutPageProps) {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
   return {
     title: messages?.TabTitles?.about_us || "Doctor Consultation",
   };
@@ -26,7 +27,10 @@ export default function AboutPage() {
       <Head>
         <title>{t("aboutUsTitle", { appName: APP_NAME })}</title>
         <meta name="description" content={t("metaDescription")} />
-        <meta property="og:title" content={t("aboutUsTitle", { appName: APP_NAME })} />
+        <meta
+          property="og:title"
+          content={t("aboutUsTitle", { appName: APP_NAME })}
+        />
         <meta property="og:description" content={t("metaDescription")} />
         <meta property="og:image" content="/assets/doctor-consultation.jpg" />
       </Head>
@@ -55,7 +59,9 @@ export default function AboutPage() {
         {/* Mission */}
         <section className="bg-secondary rounded-xl shadow p-8 text-center mb-16">
           <h2 className="text-3xl font-semibold">{t("ourMissionTitle")}</h2>
-          <p className="mt-4 text-muted-foreground">{t("ourMissionDescription")}</p>
+          <p className="mt-4 text-muted-foreground">
+            {t("ourMissionDescription")}
+          </p>
         </section>
 
         {/* Why Choose Us */}
@@ -73,19 +79,24 @@ export default function AboutPage() {
             <h2 className="text-3xl font-semibold">{t("whyChooseUsTitle")}</h2>
             <ul className="list-disc list-inside text-muted-foreground space-y-2">
               <li>
-                <strong>{t("expertDoctors")}</strong> {t("expertDoctorsDescription")}
+                <strong>{t("expertDoctors")}</strong>{" "}
+                {t("expertDoctorsDescription")}
               </li>
               <li>
-                <strong>{t("convenience")}</strong> {t("convenienceDescription")}
+                <strong>{t("convenience")}</strong>{" "}
+                {t("convenienceDescription")}
               </li>
               <li>
-                <strong>{t("secureConfidential")}</strong> {t("secureConfidentialDescription")}
+                <strong>{t("secureConfidential")}</strong>{" "}
+                {t("secureConfidentialDescription")}
               </li>
               <li>
-                <strong>{t("affordableHealthcare")}</strong> {t("affordableHealthcareDescription")}
+                <strong>{t("affordableHealthcare")}</strong>{" "}
+                {t("affordableHealthcareDescription")}
               </li>
               <li>
-                <strong>{t("support24x7")}</strong> {t("support24x7Description")}
+                <strong>{t("support24x7")}</strong>{" "}
+                {t("support24x7Description")}
               </li>
             </ul>
           </div>
@@ -107,9 +118,15 @@ export default function AboutPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-6">
           <div className="md:w-1/2 space-y-3">
             <h2 className="text-3xl font-semibold">{t("contactUsTitle")}</h2>
-            <p className="text-muted-foreground">📧 {t("email")}: support@doctorconsultation.com</p>
-            <p className="text-muted-foreground">📞 {t("phone")}: +1 234 567 890</p>
-            <p className="text-muted-foreground">📍 {t("address")}: 123 Health St, Wellness City, Country</p>
+            <p className="text-muted-foreground">
+              📧 {t("email")}: support@doctorconsultation.com
+            </p>
+            <p className="text-muted-foreground">
+              📞 {t("phone")}: +1 234 567 890
+            </p>
+            <p className="text-muted-foreground">
+              📍 {t("address")}: 123 Health St, Wellness City, Country
+            </p>
           </div>
           <div className="md:w-1/2">
             <Image
