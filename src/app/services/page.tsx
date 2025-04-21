@@ -2,12 +2,18 @@ import { useTranslations } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { FaHeartbeat, FaUserMd, FaLaptopMedical, FaStethoscope, FaShieldAlt, FaClock } from "react-icons/fa";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
   const messages = await getMessages({ locale });
   return {
-    title: messages?.TabTitles?.services || "Our Services",
+    title: messages?.TabTitles?.services || "Doctor Consultation",
   };
 }
+
 
 export default function ServicesPage() {
   const t = useTranslations("ServicesPage");

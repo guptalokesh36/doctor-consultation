@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { FaStethoscope, FaUserMd, FaComments } from "react-icons/fa";
 import Link from "next/link";
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
   const messages = await getMessages({ locale });
   return {
     title: messages?.TabTitles?.home || "Doctor Consultation",
